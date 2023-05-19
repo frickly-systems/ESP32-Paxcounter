@@ -353,6 +353,12 @@ void setup() {
   _ASSERT(mqtt_init() == ESP_OK);
 #endif
 
+// initialize serial transport
+#ifdef ENABLE_SERIAL_TRANSPORT
+  strcat_P(features, " SERIAL_TRANSPORT");
+  _ASSERT(serial_transport_init() == ESP_OK);
+#endif
+
 #if (HAS_SDS011)
   ESP_LOGI(TAG, "init fine-dust-sensor");
   if (sds011_init())

@@ -9,6 +9,7 @@
 #include "display.h"
 #include "sdcard.h"
 #include "payload.h"
+#include "serial_transport.h"
 
 void SendPayload(uint8_t port);
 void sendData(void);

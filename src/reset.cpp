@@ -148,6 +148,10 @@ void enter_deepsleep(uint32_t wakeup_sec, gpio_num_t wakeup_gpio) {
   spi_deinit();
 #endif
 
+#ifdef ENABLE_SERIAL_TRANSPORT
+  serial_transport_deinit();
+#endif
+
 // save LMIC state to RTC RAM
 #if (HAS_LORA)
   SaveLMICToRTC(wakeup_sec);

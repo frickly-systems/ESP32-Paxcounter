@@ -54,6 +54,9 @@ void SendPayload(uint8_t port) {
 #ifdef HAS_MQTT
   mqtt_enqueuedata(&SendBuffer);
 #endif
+#ifdef ENABLE_SERIAL_TRANSPORT
+  serial_transport_enqueuedata(&SendBuffer);
+#endif
 } // SendPayload
 
 // timer triggered function to prepare payload to send
@@ -193,6 +196,9 @@ void flushQueues(void) {
 #ifdef HAS_MQTT
   mqtt_queuereset();
 #endif
+#ifdef ENABLE_SERIAL_TRANSPORT
+  serial_transport_queuereset();
+#endif
 }
 
 bool allQueuesEmtpy(void) {
@@ -205,6 +211,9 @@ bool allQueuesEmtpy(void) {
 #endif
 #ifdef HAS_MQTT
   rc += mqtt_queuewaiting();
+#endif
+#ifdef ENABLE_SERIAL_TRANSPORT
+  rc += serial_transport_queuewaiting();
 #endif
   return (rc == 0) ? true : false;
 }
